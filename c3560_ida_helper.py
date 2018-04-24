@@ -1,3 +1,5 @@
+# author: dengxun @ 360 A-TEAM
+
 from idaapi import *
 from idautils import *
 from idc import *

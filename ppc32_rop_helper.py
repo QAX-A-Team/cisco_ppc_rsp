@@ -1,3 +1,5 @@
+# author: dengxun @ 360 A-TEAM
+
 from capstone import *
 import binascii, re
 

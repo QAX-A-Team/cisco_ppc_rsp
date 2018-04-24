@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+# author: dengxun @ 360 A-TEAM
+
 import serial, re, time, string, sys, binascii
 from collections import OrderedDict
 from prompt_toolkit import prompt

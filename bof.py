@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# author: dengxun @ 360 A-TEAM
 
 import socket, struct, binascii
 from optparse import OptionParser
